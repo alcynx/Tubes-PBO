@@ -8,7 +8,7 @@ public class data_kas {
    private float Saldo;
    private String Keterangan;
    
-   public data_kas(float pengeluaran, float pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
+   public data_kas(float Pengeluaran, float Pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
    this.Pengeluaran = Pengeluaran;
    this.Pemasukan = Pemasukan;
    this.NoTransaksi = NoTransaksi;
@@ -18,31 +18,31 @@ public class data_kas {
    public float getPengeluaran(){
        return this.Pengeluaran;
    }
-   public void setPengeluaran(){
+   public void setPengeluaran(float Pengeluaran){
        this.Pengeluaran = Pengeluaran;
    }
    public float getPemasukan(){
        return this.Pemasukan;
    }
-   public void setPemasukan(){
+   public void setPemasukan(float Pemasukan){
        this.Pemasukan = Pemasukan;
    }
    public int getNoTransaksi(){
        return this.NoTransaksi;
    }
-   public void setNoTransaksi(){
+   public void setNoTransaksi(int NoTransaksi){
        this.NoTransaksi = NoTransaksi;
    }
    public float getSaldo(){
        return this.Saldo;
    }
-   public void setSaldo(){
+   public void setSaldo(float Saldo){
        this.Saldo = Saldo;
    }
    public String getKeterangan(){
        return this.Keterangan;
    }
-   public void setKeterangan(){
+   public void setKeterangan(String Keterangan){
        this.Keterangan = Keterangan;
    }
 
