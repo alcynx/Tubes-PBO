@@ -1,5 +1,5 @@
 import java.util.Date;
-public class data_mhs {
+public class Mahasiswa {
     public String NIM;
     public String Nama;
     private String Alamat;
@@ -8,7 +8,7 @@ public class data_mhs {
     public String Gender;
     
     // Constructors
-    public data_mhs(String NIM, String Nama, String Alamat, Date Born, String Tlp, String Gender){
+    public Mahasiswa(String NIM, String Nama, String Alamat, Date Born, String Tlp, String Gender){
     this.Alamat = Alamat;
     this.Born = Born;
     this.Tlp = Tlp;
