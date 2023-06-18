@@ -1,15 +1,15 @@
 import java.util.Date;
 
 public class Kas {
-    private float Pengeluaran;
-    private float Pemasukan;
+    private double Pengeluaran;
+    private double Pemasukan;
     private int NoTransaksi;
     public Date TglTransaksi;
-    private float Saldo;
+    private double Saldo;
     private String Keterangan;
     
     // Constructors
-    public Kas(float Pengeluaran, float Pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
+    public Kas(double Pengeluaran, double Pemasukan,int NoTransaksi,Date TglTransaksi, double Saldo, String Keterangan){
         this.Pengeluaran = Pengeluaran;
         this.Pemasukan = Pemasukan;
         this.NoTransaksi = NoTransaksi;
@@ -18,16 +18,16 @@ public class Kas {
     }
 
     // Method Setter Getter
-    public float getPengeluaran(){
+    public double getPengeluaran(){
         return this.Pengeluaran;
     }
-    public void setPengeluaran(float Pengeluaran){
+    public void setPengeluaran(double Pengeluaran){
         this.Pengeluaran = Pengeluaran;
     }
-    public float getPemasukan(){
+    public double getPemasukan(){
         return this.Pemasukan;
     }
-    public void setPemasukan(float Pemasukan){
+    public void setPemasukan(double Pemasukan){
         this.Pemasukan = Pemasukan;
     }
     public int getNoTransaksi(){
@@ -36,10 +36,10 @@ public class Kas {
     public void setNoTransaksi(int NoTransaksi){
         this.NoTransaksi = NoTransaksi;
     }
-    public float getSaldo(){
+    public double getSaldo(){
         return this.Saldo;
     }
-    public void setSaldo(float Saldo){
+    public void setSaldo(double Saldo){
         this.Saldo = Saldo;
     }
     public String getKeterangan(){
@@ -50,7 +50,7 @@ public class Kas {
     }
 
    // Method Tambah
-    public void TambahKas (float Pengeluaran, float Pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
+    public void TambahKas (double Pengeluaran, double Pemasukan,int NoTransaksi,Date TglTransaksi, double Saldo, String Keterangan){
         this.Pengeluaran = Pengeluaran;
         this.Pemasukan = Pemasukan;
         this.NoTransaksi = NoTransaksi;
@@ -72,7 +72,7 @@ public class Kas {
     }
 
     // method edit
-    public void editData(float Pengeluaran, float Pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
+    public void editData(double Pengeluaran, double Pemasukan,int NoTransaksi,Date TglTransaksi, double Saldo, String Keterangan){
         this.Pengeluaran = Pengeluaran;
         this.Pemasukan = Pemasukan;
         this.NoTransaksi = NoTransaksi;
