@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class data_kas {
+public class Kas {
     private float Pengeluaran;
     private float Pemasukan;
     private int NoTransaksi;
@@ -9,7 +9,7 @@ public class data_kas {
     private String Keterangan;
     
     // Constructors
-    public data_kas(float Pengeluaran, float Pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
+    public Kas(float Pengeluaran, float Pemasukan,int NoTransaksi,Date TglTransaksi, float Saldo, String Keterangan){
         this.Pengeluaran = Pengeluaran;
         this.Pemasukan = Pemasukan;
         this.NoTransaksi = NoTransaksi;
