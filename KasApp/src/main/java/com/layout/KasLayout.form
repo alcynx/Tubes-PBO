@@ -93,28 +93,44 @@
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+=======
+                      <Group type="102" attributes="0">
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
                           <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="hapusbtn" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="editButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="masukbtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="keluarbtn" min="-2" max="-2" attributes="0"/>
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="backbtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                           </Group>
+<<<<<<< HEAD
                           <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
                       </Group>
                   </Group>
               </Group>
@@ -161,6 +177,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="hapusbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="backbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                               <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="masukbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="keluarbtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -168,6 +185,12 @@
                       </Group>
                   </Group>
                   <EmptySpace pref="64" max="32767" attributes="0"/>
+=======
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
               </Group>
           </Group>
         </DimensionLayout>
@@ -395,6 +418,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backbtnActionPerformed"/>
           </Events>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="editButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -428,6 +452,8 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="masukbtnActionPerformed"/>
           </Events>
         </Component>
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
       </SubComponents>
     </Container>
   </SubComponents>

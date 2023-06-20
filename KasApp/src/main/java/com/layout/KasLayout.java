@@ -1,5 +1,6 @@
 package com.layout;
 
+<<<<<<< HEAD
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +26,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Properties;
+=======
+import javax.swing.table.DefaultTableModel;
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -36,14 +40,18 @@ import java.util.Properties;
  * @author LENOVO
  */
 public class KasLayout extends javax.swing.JFrame {
+<<<<<<< HEAD
     String currentDirectory = System.getProperty("user.dir");
     String fileName = "data-kas.txt";
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
 
     /**
      * Creates new form Mahasiswa
      */
     public KasLayout() {
         initComponents();
+<<<<<<< HEAD
         
         this.generateTableText();
        
@@ -64,6 +72,8 @@ public class KasLayout extends javax.swing.JFrame {
          } catch (IOException e) {
                 e.printStackTrace();
          }
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
     }
 
     /**
@@ -94,9 +104,12 @@ public class KasLayout extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         hapusbtn = new javax.swing.JButton();
         backbtn = new javax.swing.JButton();
+<<<<<<< HEAD
         editButton = new javax.swing.JButton();
         keluarbtn = new javax.swing.JButton();
         masukbtn = new javax.swing.JButton();
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -221,6 +234,7 @@ public class KasLayout extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         editButton.setBackground(new java.awt.Color(188, 190, 250));
         editButton.setText("Edit");
         editButton.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +259,8 @@ public class KasLayout extends javax.swing.JFrame {
             }
         });
 
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -275,15 +291,19 @@ public class KasLayout extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(203, 203, 203))
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(hapusbtn)
+<<<<<<< HEAD
                                 .addGap(18, 18, 18)
                                 .addComponent(editButton)
                                 .addGap(26, 26, 26)
@@ -294,6 +314,16 @@ public class KasLayout extends javax.swing.JFrame {
                                 .addComponent(backbtn))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 44, Short.MAX_VALUE))))
+=======
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backbtn))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 61, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(203, 203, 203))))
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,11 +360,16 @@ public class KasLayout extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hapusbtn)
+<<<<<<< HEAD
                             .addComponent(backbtn)
                             .addComponent(editButton)
                             .addComponent(masukbtn)
                             .addComponent(keluarbtn))))
                 .addContainerGap(64, Short.MAX_VALUE))
+=======
+                            .addComponent(backbtn))))
+                .addContainerGap(61, Short.MAX_VALUE))
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -351,6 +386,7 @@ public class KasLayout extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     public void editDataTable(String noData, String tanggal, String saldo, String keterangan) {
         int selectedRow = tbl_kas.getSelectedRow();
         
@@ -388,6 +424,8 @@ public class KasLayout extends javax.swing.JFrame {
         }
     }
     
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -398,11 +436,15 @@ public class KasLayout extends javax.swing.JFrame {
     private void hapusbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusbtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = tbl_kas.getSelectedRow();
+<<<<<<< HEAD
         
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
         if (selectedRow != -1) {
             DefaultTableModel model = (DefaultTableModel) tbl_kas.getModel();
             model.removeRow(selectedRow);
         }
+<<<<<<< HEAD
         
         int option = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
 
@@ -450,6 +492,8 @@ public class KasLayout extends javax.swing.JFrame {
         
        
         
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
     }//GEN-LAST:event_hapusbtnActionPerformed
 
     private void simpanbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanbtnActionPerformed
@@ -458,6 +502,7 @@ public class KasLayout extends javax.swing.JFrame {
             noDatatxt.getText(), saldotxt.getText(), tgltransaksitxt.getText(), keterangantxt.getSelectedItem()
         });
         tbl_kas.setModel(tbl);
+<<<<<<< HEAD
         
       
         try {
@@ -480,6 +525,8 @@ public class KasLayout extends javax.swing.JFrame {
             System.out.println("ada error");
             System.out.println(e);
         }
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
 
         //reset nilai pada field
         saldotxt.setText("");
@@ -500,6 +547,7 @@ public class KasLayout extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_noDatatxtActionPerformed
 
+<<<<<<< HEAD
     
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         int selectedRow = tbl_kas.getSelectedRow();
@@ -597,6 +645,8 @@ public class KasLayout extends javax.swing.JFrame {
         masuk.setVisible(true);
     }//GEN-LAST:event_masukbtnActionPerformed
 
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
     /**
      * @param args the command line arguments
      */
@@ -639,6 +689,7 @@ public class KasLayout extends javax.swing.JFrame {
         });
     }
     
+<<<<<<< HEAD
     
     public class NonEditableTableModel extends DefaultTableModel {
     public NonEditableTableModel(Object[] columnNames, int rowCount) {
@@ -663,6 +714,14 @@ public class KasLayout extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backbtn;
     private javax.swing.JButton editButton;
+=======
+    int Baris =0;
+    static Object kolom[]= {"No. Data", "Tanggal", "Saldo", "Keterangan"};
+    DefaultTableModel tbl = new DefaultTableModel(kolom,Baris);
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backbtn;
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
     private javax.swing.JButton hapusbtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -675,9 +734,13 @@ public class KasLayout extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< HEAD
     private javax.swing.JButton keluarbtn;
     private javax.swing.JComboBox<String> keterangantxt;
     private javax.swing.JButton masukbtn;
+=======
+    private javax.swing.JComboBox<String> keterangantxt;
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
     private javax.swing.JTextField noDatatxt;
     private javax.swing.JTextField saldotxt;
     private javax.swing.JButton simpanbtn;

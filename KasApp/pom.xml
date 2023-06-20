@@ -12,6 +12,7 @@
         <exec.mainClass>com.mycompany.kassapp.KassApp</exec.mainClass>
     </properties>
     <name>KasApp</name>
+<<<<<<< HEAD
     <dependencies>
         <dependency>
             <groupId>org.jdatepicker</groupId>
@@ -19,4 +20,6 @@
             <version>1.3.4</version>
         </dependency>
     </dependencies>
+=======
+>>>>>>> f3eb44d830921f864b295c80bdd6cf0119962158
 </project>
