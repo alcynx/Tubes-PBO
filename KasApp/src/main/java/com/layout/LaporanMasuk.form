@@ -54,8 +54,12 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="backbtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="backbtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="cetakbtn" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="jScrollPane1" min="-2" pref="1088" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="103" max="32767" attributes="0"/>
@@ -68,7 +72,10 @@
                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="backbtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cetakbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="backbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="334" max="-2" attributes="0"/>
                   <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -92,7 +99,7 @@
                     <Column editable="true" title="Tanggal Transaksi" type="java.lang.Object"/>
                     <Column editable="true" title="Saldo Awal" type="java.lang.Object"/>
                     <Column editable="true" title="Pemasukan" type="java.lang.Object"/>
-                    <Column editable="true" title="Sisa Saldo" type="java.lang.Object"/>
+                    <Column editable="true" title="Saldo Total" type="java.lang.Object"/>
                     <Column editable="true" title="Keterangan" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -148,12 +155,23 @@
             <Property name="text" type="java.lang.String" value="Laporan Pemasukan"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="backbtn">
+        <Component class="javax.swing.JButton" name="cetakbtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fa" green="be" red="bc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cetak"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cetakbtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="backbtn">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fa" green="be" red="bc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Kembali"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backbtnActionPerformed"/>

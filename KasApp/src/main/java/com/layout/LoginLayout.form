@@ -171,7 +171,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Paassword"/>
+            <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
       </SubComponents>

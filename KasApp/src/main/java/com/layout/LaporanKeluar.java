@@ -30,6 +30,7 @@ public class LaporanKeluar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_mahasiswa = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        cetakbtn = new javax.swing.JButton();
         backbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,8 +54,16 @@ public class LaporanKeluar extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Laporan Pengeluaran");
 
+        cetakbtn.setBackground(new java.awt.Color(188, 190, 250));
+        cetakbtn.setText("Cetak");
+        cetakbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakbtnActionPerformed(evt);
+            }
+        });
+
         backbtn.setBackground(new java.awt.Color(188, 190, 250));
-        backbtn.setText("Cetak");
+        backbtn.setText("Kembali");
         backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtnActionPerformed(evt);
@@ -71,8 +80,11 @@ public class LaporanKeluar extends javax.swing.JFrame {
                 .addGap(525, 525, 525))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(backbtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(backbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cetakbtn))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1088, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 103, Short.MAX_VALUE))
         );
@@ -82,7 +94,9 @@ public class LaporanKeluar extends javax.swing.JFrame {
                 .addGap(74, 74, 74)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(backbtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cetakbtn)
+                    .addComponent(backbtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -105,10 +119,14 @@ public class LaporanKeluar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cetakbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cetakbtnActionPerformed
+
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         // TODO add your handling code here:
         dispose();
-        MenuLayout back = new MenuLayout();
+        KasLayout back = new KasLayout();
         back.setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
 
@@ -149,6 +167,7 @@ public class LaporanKeluar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backbtn;
+    private javax.swing.JButton cetakbtn;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

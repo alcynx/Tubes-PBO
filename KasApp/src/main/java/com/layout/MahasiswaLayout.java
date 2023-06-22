@@ -1,7 +1,24 @@
 package com.layout;
 
+import static com.layout.KasLayout.kolom;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.Dialog;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Properties;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,15 +26,35 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author LENOVO
+ * @author Nabila
  */
 public class MahasiswaLayout extends javax.swing.JFrame {
+    String currentDirectory = System.getProperty("user.dir");
+    String fileName = "mahasiswa.txt";
 
     /**
      * Creates new form Mahasiswa
      */
     public MahasiswaLayout() {
         initComponents();
+        
+        this.generateTableText();
+    }
+    
+    public void generateTableText() {
+       File file = new File(currentDirectory,fileName);
+       try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",");
+                tbl.addRow(new Object[]{
+                 words[0], words[1], words[2], words[3], words[4], words[5]
+                });
+                tbl_mahasiswa.setModel(tbl);
+            }
+         } catch (IOException e) {
+                e.printStackTrace();
+         }
     }
 
     /**
@@ -52,6 +89,7 @@ public class MahasiswaLayout extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         hapusbtn = new javax.swing.JButton();
         backbtn = new javax.swing.JButton();
+        editbtn = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -132,7 +170,7 @@ public class MahasiswaLayout extends javax.swing.JFrame {
         jLabel7.setText("Jenis Kelamin");
 
         gendertxt.setBackground(new java.awt.Color(188, 190, 250));
-        gendertxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan", "Tidak ingin memberi tahu", " " }));
+        gendertxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
         gendertxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gendertxtActionPerformed(evt);
@@ -196,6 +234,14 @@ public class MahasiswaLayout extends javax.swing.JFrame {
             }
         });
 
+        editbtn.setBackground(new java.awt.Color(188, 190, 250));
+        editbtn.setText("Edit");
+        editbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -239,6 +285,8 @@ public class MahasiswaLayout extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(hapusbtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(editbtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(backbtn))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -271,9 +319,9 @@ public class MahasiswaLayout extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(alamattxt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gendertxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(gendertxt)
+                            .addComponent(alamattxt))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(simpanbtn)
                         .addGap(69, 69, 69))
@@ -289,7 +337,8 @@ public class MahasiswaLayout extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hapusbtn)
-                    .addComponent(backbtn))
+                    .addComponent(backbtn)
+                    .addComponent(editbtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -306,7 +355,42 @@ public class MahasiswaLayout extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void editDataTable(String Nama, String NIM, String Alamat, String Born, String Tlp, String Gender) {
+        int selectedRow = tbl_mahasiswa.getSelectedRow();
+        
+        File file = new File(currentDirectory,fileName);
+        // Baca file dan simpan ke dalam list
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        
+        
+        // Ubah baris sesuai dengan indeks
+        if (selectedRow >= 0 && selectedRow < lines.size()) {
+            lines.set(selectedRow, Nama + "," + NIM + "," + Alamat + "," + Born + "," + Tlp + "," + Gender);
+        } else {
+            System.out.println("Invalid line index");
+            return;
+        }
 
+       
+        // Tulis ulang isi list ke file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void namatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namatxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_namatxtActionPerformed
@@ -326,13 +410,35 @@ public class MahasiswaLayout extends javax.swing.JFrame {
     private void simpanbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanbtnActionPerformed
         // TODO add your handling code here:
         tbl.addRow(new Object[]{
-            namatxt.getText(), nimtxt.getText(), alamattxt.getText(), tgltxt.getText(), telpontxt.getText(), gendertxt.getSelectedItem()
+            namatxt.getText(), nimtxt.getText(), alamattxt.getText(), tgltxt.getText(), telpontxt.getText(),gendertxt.getSelectedItem()
         });
         tbl_mahasiswa.setModel(tbl);
         
+      
+        try {
+            File file = new File(currentDirectory,fileName);
+            
+            if(file.createNewFile()) {
+                System.out.println("File berhasil dibuat");
+            } else {
+                System.out.println("File sudah ada");
+            }
+            
+         
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(namatxt.getText() + "," + nimtxt.getText() + "," + alamattxt.getText() + "," + tgltxt.getText() + "," + telpontxt.getText() + "," + gendertxt.getSelectedItem() + "\n");
+            fileWriter.close();
+            
+            
+           
+        }  catch (IOException e) {
+            System.out.println("ada error");
+            System.out.println(e);
+        }
+
         //reset nilai pada field
-        nimtxt.setText("");
         namatxt.setText("");
+        nimtxt.setText("");
         alamattxt.setText("");
         tgltxt.setText("");
         telpontxt.setText("");
@@ -346,9 +452,53 @@ public class MahasiswaLayout extends javax.swing.JFrame {
     private void hapusbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusbtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = tbl_mahasiswa.getSelectedRow();
+        
         if (selectedRow != -1) {
             DefaultTableModel model = (DefaultTableModel) tbl_mahasiswa.getModel();
             model.removeRow(selectedRow);
+        }
+        
+        int option = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+            File file = new File(currentDirectory,fileName);
+            // Baca file dan simpan ke dalam list
+            List<String> lines = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    lines.add(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+
+            // Hapus baris sesuai dengan indeks
+            if (selectedRow >= 0 && selectedRow < lines.size()) {
+                lines.remove(selectedRow);
+            } else {
+                System.out.println("Invalid line index");
+                return;
+            }
+
+
+            // Tulis ulang isi list ke file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                for (String line : lines) {
+                    bw.write(line);
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!", "Berhasil!", JOptionPane.INFORMATION_MESSAGE);
+             
+        } else {
+            // Pembatalan penghapusan
+            System.out.println("Penghapusan dibatalkan.");
         }
     }//GEN-LAST:event_hapusbtnActionPerformed
 
@@ -358,6 +508,98 @@ public class MahasiswaLayout extends javax.swing.JFrame {
         MenuLayout back = new MenuLayout();
         back.setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
+
+    private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tbl_mahasiswa.getSelectedRow();
+        
+        if (selectedRow != -1) {
+             JPanel panel = new JPanel();
+             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+             
+             JTextField NamaField = new JTextField(50);
+             JTextField NIMField = new JTextField(50);
+             JTextField AlamatField = new JTextField(50);
+             JTextField BornField = new JTextField(50);
+             JTextField TlpField = new JTextField(50);
+             
+             String[] genderOptions = {"Laki-laki", "Perempuan"};
+             JComboBox<String> genderComboBox = new JComboBox<>(genderOptions);
+             JTextField genderField = new JTextField(50);
+             
+             genderComboBox.addActionListener(e -> {
+                String selectedOption = (String) genderComboBox.getSelectedItem();
+                genderField.setText(selectedOption);
+            });
+
+
+             File file = new File(currentDirectory,fileName);
+             // Baca file dan simpan ke dalam list
+             List<String> lines = new ArrayList<>();
+             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                 String line;
+                 while ((line = br.readLine()) != null) {
+                     lines.add(line);
+                 }
+             } catch (IOException e) {
+                 e.printStackTrace();
+                 return;
+             }
+             
+              
+            // Ubah baris sesuai dengan indeks
+            if (selectedRow >= 0 && selectedRow < lines.size()) {
+                String[] dataArray = lines.get(selectedRow).split(",");
+                
+                NamaField.setText(dataArray[0]);
+                NIMField.setText(dataArray[1]);
+                AlamatField.setText(dataArray[2]);
+                BornField.setText(dataArray[3]);
+                TlpField.setText(dataArray[4]);
+                genderField.setText(dataArray[5]);
+                
+            } else {
+                System.out.println("Invalid line index");
+                return;
+            }
+
+
+            
+             panel.add(new JLabel("Nama :"));
+             panel.add(NamaField);
+             panel.add(new JLabel("NIM :"));
+             panel.add(NIMField);
+             panel.add(new JLabel("Alamat :"));
+             panel.add(AlamatField);
+             panel.add(new JLabel("Tgl Lahir:"));
+             panel.add(BornField);
+             panel.add(new JLabel("No. Telepon :"));
+             panel.add(TlpField);
+             panel.add(new JLabel("Jenis Kelamin :"));
+             panel.add(genderComboBox);
+             
+             int option = JOptionPane.showOptionDialog(null, panel, "Enter Information",
+                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+             if (option == JOptionPane.OK_OPTION) {
+                 String Nama = NamaField.getText();
+                 String NIM = NIMField.getText();
+                 String Alamat = AlamatField.getText();
+                 String Born = BornField.getText();
+                 String Tlp = TlpField.getText();
+                 String Gender = genderField.getText();
+                 
+                 this.editDataTable(Nama, NIM, Alamat, Born, Tlp, Gender);
+                 tbl.setRowCount(0);
+                 this.generateTableText();
+                 JOptionPane.showMessageDialog(null, "Data Berhasil Diubah!", "Berhasil!", JOptionPane.INFORMATION_MESSAGE);
+
+             } else {
+                 System.out.println("Input canceled.");
+             }
+        }
+    }//GEN-LAST:event_editbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,13 +639,25 @@ public class MahasiswaLayout extends javax.swing.JFrame {
         });
     }
     
+    public class NonEditableTableModel extends DefaultTableModel {
+    public NonEditableTableModel(Object[] columnNames, int rowCount) {
+        super(columnNames, rowCount);
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+        }
+    }
+    
     int Baris =0;
     static Object kolom[]= {"Nama", "NIM", "Alamat", "Tgl Lahir", "No. Telepon", "Jenis Kelamin"};
-    DefaultTableModel tbl = new DefaultTableModel(kolom,Baris);
+    MahasiswaLayout.NonEditableTableModel tbl = new MahasiswaLayout.NonEditableTableModel(kolom, Baris);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alamattxt;
     private javax.swing.JButton backbtn;
+    private javax.swing.JButton editbtn;
     private javax.swing.JComboBox<String> gendertxt;
     private javax.swing.JButton hapusbtn;
     private javax.swing.JLabel jLabel1;

@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.layout;
+import java.awt.Dialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,7 +89,7 @@ public class LoginLayout extends javax.swing.JFrame {
 
         jLabel2.setText("Username");
 
-        jLabel3.setText("Paassword");
+        jLabel3.setText("Password");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,8 +158,9 @@ public class LoginLayout extends javax.swing.JFrame {
             this.setVisible(false);
             new MenuLayout().setVisible(true);
         }else{
-            usernametxt.setText("Username");
-            passwordtxt.setText("Password");
+            JOptionPane.showMessageDialog(null, "Username atau password salah", "Login Gagal", JOptionPane.ERROR_MESSAGE);
+            usernametxt.setText("");
+            passwordtxt.setText("");
             usernametxt.requestFocus();
         }
     }//GEN-LAST:event_login_btnActionPerformed
