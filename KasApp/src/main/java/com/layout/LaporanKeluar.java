@@ -2,20 +2,61 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.layout;
 
+package com.layout;
+import com.code.DataTransactionManagement;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.util.Properties;
 /**
  *
  * @author desti
  */
-public class LaporanKeluar extends javax.swing.JFrame {
-
+public class LaporanKeluar extends javax.swing.JFrame implements DataTransactionManagement {
+    String currentDirectory = System.getProperty("user.dir");
+    String fileName = "data-kas.txt";
     /**
      * Creates new form LaporanKeluar
      */
     public LaporanKeluar() {
         initComponents();
+        this.printDataTransactions();
     }
+    public void printDataTransactions(){
+    File file = new File(currentDirectory, fileName);
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] words = line.split(",");
+            if (words[3].equals("Pengeluaran")) {
+                tbl.addRow(new Object[]{
+                        words[0], words[1], words[2], words[3]
+                });
+                tbl_mahasiswa.setModel(tbl);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+    public void changeDataTransaction(){}
+    public void deleteDataTransaction(){}
+    public void insertNewDataTransaction(){}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,13 +80,13 @@ public class LaporanKeluar extends javax.swing.JFrame {
 
         tbl_mahasiswa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "No Transaksi", "Tanggal Transaksi", "Saldo Awal", "Pengeluaran", "Sisa Saldo", "Keterangan"
+                "No Transaksi", "Tanggal Transaksi", "Pengeluaran"
             }
         ));
         jScrollPane1.setViewportView(tbl_mahasiswa);
@@ -120,7 +161,49 @@ public class LaporanKeluar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cetakbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakbtnActionPerformed
-        // TODO add your handling code here:
+       LocalTime currentTime = LocalTime.now();     
+   
+        // Extract individual components of the current time
+        int hour = currentTime.getHour();
+        int minute = currentTime.getMinute();
+        int second = currentTime.getSecond();
+        
+        String currentDirectory = System.getProperty("user.dir");
+        String fileNameCSV = "data-pengeluaran-"+hour+"-"+minute+"-"+second+".csv";
+        System.out.println(fileNameCSV);
+        try {
+            File fileCSV = new File(currentDirectory,fileNameCSV);
+            
+            if(fileCSV.createNewFile()) {
+                System.out.println("File berhasil dibuat");
+            } else {
+                System.out.println("File sudah ada");
+            }
+                    
+            FileWriter fileWriter = new FileWriter(fileCSV, true);
+            fileWriter.write("No;NoData;Saldo;Tanggal;Keterangan"+ "\n");
+            int NoBaris = 1; 
+            String fileName = "data-kas.txt";
+            File file = new File(currentDirectory,fileName);
+            try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",");
+                if (words[3].equals("Pengeluaran")) {
+                   fileWriter.write( String.valueOf(NoBaris)+ ";" + line.replace(",", ";") + "\n");
+                   NoBaris++;
+                }
+            }
+         } catch (IOException e) {
+                e.printStackTrace();
+         }
+            fileWriter.close();
+              
+        }  catch (IOException e) {
+            System.out.println("ada error");
+            System.out.println(e);
+        }
+                                      
     }//GEN-LAST:event_cetakbtnActionPerformed
 
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
@@ -164,6 +247,19 @@ public class LaporanKeluar extends javax.swing.JFrame {
             }
         });
     }
+    public class NonEditableTableModel extends DefaultTableModel {
+    public NonEditableTableModel(Object[] columnNames, int rowCount) {
+        super(columnNames, rowCount);
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+        }
+    }
+    int Baris =0;
+    static Object kolom[]= {"No. Data", "Tanggal", "Saldo", "Keterangan"};
+    NonEditableTableModel tbl = new NonEditableTableModel(kolom, Baris);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backbtn;

@@ -1,2 +1,3 @@
 21,14/02/2023,2000,Pengeluaran
 2,14/02/2023,30000,Pengeluaran
+4,15000,22/06/2023,Pemasukan

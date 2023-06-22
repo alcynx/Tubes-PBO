@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Properties;
+import com.code.DataTransactionManagement;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -35,7 +36,7 @@ import java.util.Properties;
  *
  * @author LENOVO
  */
-public class KasLayout extends javax.swing.JFrame {
+public class KasLayout extends javax.swing.JFrame implements DataTransactionManagement {
     String currentDirectory = System.getProperty("user.dir");
     String fileName = "data-kas.txt";
 
@@ -45,12 +46,12 @@ public class KasLayout extends javax.swing.JFrame {
     public KasLayout() {
         initComponents();
         
-        this.generateTableText();
+        this.printDataTransactions();
        
     }
     
     
-    public void generateTableText() {
+    public void printDataTransactions() {
        File file = new File(currentDirectory,fileName);
        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
@@ -65,6 +66,178 @@ public class KasLayout extends javax.swing.JFrame {
                 e.printStackTrace();
          }
     }
+    public void changeDataTransaction(){
+    int selectedRow = tbl_kas.getSelectedRow();
+        
+        if (selectedRow != -1) {
+             JPanel panel = new JPanel();
+             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+             
+             JTextField noDataField = new JTextField(50);
+             JTextField tanggalField = new JTextField(50);
+             JTextField saldoField = new JTextField(50);
+             
+             String[] keteranganOptions = {"Pemasukan", "Pengeluaran"};
+             JComboBox<String> keteranganComboBox = new JComboBox<>(keteranganOptions);
+             JTextField keteranganField = new JTextField(50);
+             
+             keteranganComboBox.addActionListener(e -> {
+                String selectedOption = (String) keteranganComboBox.getSelectedItem();
+                keteranganField.setText(selectedOption);
+            });
+
+
+             File file = new File(currentDirectory,fileName);
+             // Baca file dan simpan ke dalam list
+             List<String> lines = new ArrayList<>();
+             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                 String line;
+                 while ((line = br.readLine()) != null) {
+                     lines.add(line);
+                 }
+             } catch (IOException e) {
+                 e.printStackTrace();
+                 return;
+             }
+             
+              
+            // Ubah baris sesuai dengan indeks
+            if (selectedRow >= 0 && selectedRow < lines.size()) {
+                String[] dataArray = lines.get(selectedRow).split(",");
+                
+                noDataField.setText(dataArray[0]);
+                tanggalField.setText(dataArray[1]);
+                saldoField.setText(dataArray[2]);
+                keteranganField.setText(dataArray[3]);
+                
+            } else {
+                System.out.println("Invalid line index");
+                return;
+            }
+
+
+            
+             panel.add(new JLabel("No Data :"));
+             panel.add(noDataField);
+             panel.add(new JLabel("Tanggal :"));
+             panel.add(tanggalField);
+             panel.add(new JLabel("Saldo :"));
+             panel.add(saldoField);
+             panel.add(new JLabel("Keterangan :"));
+             panel.add(keteranganComboBox);
+             
+             int option = JOptionPane.showOptionDialog(null, panel, "Enter Information",
+                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+             if (option == JOptionPane.OK_OPTION) {
+                 String noData = noDataField.getText();
+                 String tanggal = tanggalField.getText();
+                 String saldo = saldoField.getText();
+                 String keterangan = keteranganField.getText();
+                 
+                 this.editDataTable(noData, tanggal, saldo, keterangan);
+                 tbl.setRowCount(0);
+                 this.printDataTransactions();
+                 JOptionPane.showMessageDialog(null, "Data Berhasil Diubah!", "Berhasil!", JOptionPane.INFORMATION_MESSAGE);
+
+             } else {
+                 System.out.println("Input canceled.");
+             }
+        }
+    }
+    public void deleteDataTransaction(){
+        // TODO add your handling code here:
+        int selectedRow = tbl_kas.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) tbl_kas.getModel();
+            model.removeRow(selectedRow);
+        }
+        
+        int option = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+            File file = new File(currentDirectory,fileName);
+            // Baca file dan simpan ke dalam list
+            List<String> lines = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    lines.add(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+
+            // Hapus baris sesuai dengan indeks
+            if (selectedRow >= 0 && selectedRow < lines.size()) {
+                lines.remove(selectedRow);
+            } else {
+                System.out.println("Invalid line index");
+                return;
+            }
+
+
+            // Tulis ulang isi list ke file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                for (String line : lines) {
+                    bw.write(line);
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!", "Berhasil!", JOptionPane.INFORMATION_MESSAGE);
+             
+        } else {
+            // Pembatalan penghapusan
+            System.out.println("Penghapusan dibatalkan.");
+        }
+        
+        
+       
+        
+    }
+    public void  insertNewDataTransaction(){
+    // TODO add your handling code here:
+        tbl.addRow(new Object[]{
+            noDatatxt.getText(), saldotxt.getText(), tgltransaksitxt.getText(), keterangantxt.getSelectedItem()
+        });
+        tbl_kas.setModel(tbl);
+        
+      
+        try {
+            File file = new File(currentDirectory,fileName);
+            
+            if(file.createNewFile()) {
+                System.out.println("File berhasil dibuat");
+            } else {
+                System.out.println("File sudah ada");
+            }
+            
+         
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(noDatatxt.getText() + "," + tgltransaksitxt.getText() + "," + saldotxt.getText() + "," + keterangantxt.getSelectedItem() + "\n");
+            fileWriter.close();
+            
+            
+           
+        }  catch (IOException e) {
+            System.out.println("ada error");
+            System.out.println(e);
+        }
+
+        //reset nilai pada field
+        saldotxt.setText("");
+        noDatatxt.setText("");
+        tgltransaksitxt.setText("");
+        keterangantxt.setSelectedIndex(0);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -395,96 +568,11 @@ public class KasLayout extends javax.swing.JFrame {
     }//GEN-LAST:event_backbtnActionPerformed
 
     private void hapusbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusbtnActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = tbl_kas.getSelectedRow();
-        
-        if (selectedRow != -1) {
-            DefaultTableModel model = (DefaultTableModel) tbl_kas.getModel();
-            model.removeRow(selectedRow);
-        }
-        
-        int option = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-        if (option == JOptionPane.YES_OPTION) {
-            File file = new File(currentDirectory,fileName);
-            // Baca file dan simpan ke dalam list
-            List<String> lines = new ArrayList<>();
-            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    lines.add(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-
-
-            // Hapus baris sesuai dengan indeks
-            if (selectedRow >= 0 && selectedRow < lines.size()) {
-                lines.remove(selectedRow);
-            } else {
-                System.out.println("Invalid line index");
-                return;
-            }
-
-
-            // Tulis ulang isi list ke file
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                for (String line : lines) {
-                    bw.write(line);
-                    bw.newLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!", "Berhasil!", JOptionPane.INFORMATION_MESSAGE);
-             
-        } else {
-            // Pembatalan penghapusan
-            System.out.println("Penghapusan dibatalkan.");
-        }
-        
-        
-       
-        
+        this.deleteDataTransaction();
     }//GEN-LAST:event_hapusbtnActionPerformed
 
     private void simpanbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanbtnActionPerformed
-        // TODO add your handling code here:
-        tbl.addRow(new Object[]{
-            noDatatxt.getText(), saldotxt.getText(), tgltransaksitxt.getText(), keterangantxt.getSelectedItem()
-        });
-        tbl_kas.setModel(tbl);
-        
-      
-        try {
-            File file = new File(currentDirectory,fileName);
-            
-            if(file.createNewFile()) {
-                System.out.println("File berhasil dibuat");
-            } else {
-                System.out.println("File sudah ada");
-            }
-            
-         
-            FileWriter fileWriter = new FileWriter(file, true);
-            fileWriter.write(noDatatxt.getText() + "," + tgltransaksitxt.getText() + "," + saldotxt.getText() + "," + keterangantxt.getSelectedItem() + "\n");
-            fileWriter.close();
-            
-            
-           
-        }  catch (IOException e) {
-            System.out.println("ada error");
-            System.out.println(e);
-        }
-
-        //reset nilai pada field
-        saldotxt.setText("");
-        noDatatxt.setText("");
-        tgltransaksitxt.setText("");
-        keterangantxt.setSelectedIndex(0);
+        this.insertNewDataTransaction();
     }//GEN-LAST:event_simpanbtnActionPerformed
 
     private void keterangantxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keterangantxtActionPerformed
@@ -501,84 +589,7 @@ public class KasLayout extends javax.swing.JFrame {
 
     
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        int selectedRow = tbl_kas.getSelectedRow();
-        
-        if (selectedRow != -1) {
-             JPanel panel = new JPanel();
-             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-             
-             JTextField noDataField = new JTextField(50);
-             JTextField tanggalField = new JTextField(50);
-             JTextField saldoField = new JTextField(50);
-             
-             String[] keteranganOptions = {"Pemasukan", "Pengeluaran"};
-             JComboBox<String> keteranganComboBox = new JComboBox<>(keteranganOptions);
-             JTextField keteranganField = new JTextField(50);
-             
-             keteranganComboBox.addActionListener(e -> {
-                String selectedOption = (String) keteranganComboBox.getSelectedItem();
-                keteranganField.setText(selectedOption);
-            });
-
-
-             File file = new File(currentDirectory,fileName);
-             // Baca file dan simpan ke dalam list
-             List<String> lines = new ArrayList<>();
-             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                 String line;
-                 while ((line = br.readLine()) != null) {
-                     lines.add(line);
-                 }
-             } catch (IOException e) {
-                 e.printStackTrace();
-                 return;
-             }
-             
-              
-            // Ubah baris sesuai dengan indeks
-            if (selectedRow >= 0 && selectedRow < lines.size()) {
-                String[] dataArray = lines.get(selectedRow).split(",");
-                
-                noDataField.setText(dataArray[0]);
-                tanggalField.setText(dataArray[1]);
-                saldoField.setText(dataArray[2]);
-                keteranganField.setText(dataArray[3]);
-                
-            } else {
-                System.out.println("Invalid line index");
-                return;
-            }
-
-
-            
-             panel.add(new JLabel("No Data :"));
-             panel.add(noDataField);
-             panel.add(new JLabel("Tanggal :"));
-             panel.add(tanggalField);
-             panel.add(new JLabel("Saldo :"));
-             panel.add(saldoField);
-             panel.add(new JLabel("Keterangan :"));
-             panel.add(keteranganComboBox);
-             
-             int option = JOptionPane.showOptionDialog(null, panel, "Enter Information",
-                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
-
-             if (option == JOptionPane.OK_OPTION) {
-                 String noData = noDataField.getText();
-                 String tanggal = tanggalField.getText();
-                 String saldo = saldoField.getText();
-                 String keterangan = keteranganField.getText();
-                 
-                 this.editDataTable(noData, tanggal, saldo, keterangan);
-                 tbl.setRowCount(0);
-                 this.generateTableText();
-                 JOptionPane.showMessageDialog(null, "Data Berhasil Diubah!", "Berhasil!", JOptionPane.INFORMATION_MESSAGE);
-
-             } else {
-                 System.out.println("Input canceled.");
-             }
-        }
+        this.changeDataTransaction();
         
     }//GEN-LAST:event_editButtonActionPerformed
 
